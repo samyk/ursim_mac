@@ -1,4 +1,4 @@
-# Instructions to run Universal Robots Simulator on Mac Apple Silicon/ARM 
+# Instructions to run Universal Robots Simulator on Mac Apple Silicon/ARM
 
 ## Setup Considerations
 
@@ -20,10 +20,9 @@ Therefore these instructions are based on running the Docker image provided by U
 	- the -p arguments are used to expose ports from docker to the host computer. 5900 is for VNC but may already be used by launchd so we map it to 5901 locally. 6080 is for http.
 	- the -v argument is to map a directory within the docker with a directory on the mac.
 - now that the URSim software is launched in docker, we access it using a remote screen sharing program VNC.
-- Find the IP address of your Mac: Settings->Wifi (or Network)->Details->TCP/IP->IP Address. Example: 192.168.1.242
 - Run a VNC client. If you don't have one, you can download and install [RealVNC Viewer for Desktop for macOS](https://www.realvnc.com/en/connect/download/viewer/)
-- in the VNC client, connect to `192.168.1.242:5900`. Replace 192.168.1.242 by your IP address.
-- URSim should show on your VNC client screen.
+- in the VNC client, connect to `127.0.0.1:5901`
+- URSim should show on your VNC client screen
 
 ## Usage Considerations
 
@@ -33,7 +32,7 @@ Docker are lightweight ephemeral instances. When a docker instance is terminated
 
 ### VNC vs HTTP
 
-Instead of using VNC to access the URSim software, a web browser, such as Safari or Chrome, can be used by going to the url: `http://192.168.1.242:6080`. Replace 192.168.1.242 by your IP address.
+Instead of using VNC to access the URSim software, a web browser, such as Safari or Chrome, can be used by going to the url: `http://127.0.0.1:6080`.
 
 Note that if the host computer (your mac) moves to a different network, such as when a laptop is using a different Wifi network, then the IP address changes. Therefore, while your docker may be still running, you will need to find your new IP address and reconnect your VNC client or web browser to that new IP address.
 
