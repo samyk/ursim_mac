@@ -1,13 +1,16 @@
-# Instructions to run Universal Robots Simulator on Mac Apple Silicon/ARM
+# Run ursim (Universal Robots Simulator) on Apple Silicon/ARM Mac
 
 ## Quick Setup
 
 ```sh
-# install rosetta
+# install rosetta if needed
 ls /Library/Apple/usr/libexec/oah/libRosettaRuntime || softwareupdate --install-rosetta --agree-to-license
 
-# install docker if needed
+# install docker and brew if needed
 docker -v || (brew -v || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && brew install docker)
+
+PROGRAM_DIR="${HOME}/Documents/programs"
+mkdir -p "$PROGRAM_DIR"
 
 # robot model
 # CB3 models: UR3 UR5 UR10
@@ -15,11 +18,11 @@ docker -v || (brew -v || /bin/bash -c "$(curl -fsSL https://raw.githubuserconten
 MODEL=UR5
 
 # cb3 or e-series?
-CONTAINER=universalrobots/ursim_cb3
-#CONTAINER=universalrobots/ursim_e-series
-docker run --rm -it -p 5901:5900 -p 6080:6080 -e ROBOT_MODEL=$MODEL -v "${HOME}/Documents/programs:/ursim/programs" --platform=linux/amd64 $CONTAINER
+#CONTAINER=universalrobots/ursim_cb3
+CONTAINER=universalrobots/ursim_e-series
+docker run --rm -it -p 5901:5900 -p 6080:6080 -e ROBOT_MODEL=$MODEL -v "$PROGRAM_DIR:/ursim/programs" --platform=linux/amd64 $CONTAINER
 
-open http://127.0.0.1:5901
+open http://127.0.0.1:6080
 ```
 
 ## Setup Considerations
