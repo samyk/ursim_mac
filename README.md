@@ -14,7 +14,7 @@ Therefore these instructions are based on running the Docker image provided by U
 	- either [Docker Desktop](https://www.docker.com/products/docker-desktop/) for Mac - Apple Silicon. Install and launch it. (No need to have a user logged into the Docker network)
 	- or in macOS Terminal> `brew install docker`
 - In the Docker Terminal window (button on the bottom right of the main window) or in the macOS Terminal if you use brew, type (in one line):
-	- `docker run --rm -it -p 5900:5900 -p 6080:6080 -v "${HOME}/Documents/programs:/ursim/programs" --platform=linux/amd64 universalrobots/ursim_e-series`
+	- `docker run --rm -it -p 5901:5900 -p 6080:6080 -v "${HOME}/Documents/programs:/ursim/programs" --platform=linux/amd64 universalrobots/ursim_e-series`
 	- the x86 to ARM emulation is done by the underlying Rosetta but we tell Docker 
 	that the image is an amd64 with the `--platform` argument. One can use the exact same instructions here for Mac Intel, Windows or Linux by just not adding the `--platform` argument.
 	- the -p arguments are used to expose ports from docker to the host computer. 5900 is for VNC but may already be used by launchd so we map it to 5901 locally. 6080 is for http.
