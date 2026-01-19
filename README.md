@@ -21,10 +21,10 @@ MODEL=UR5
 #CONTAINER=universalrobots/ursim_cb3
 CONTAINER=universalrobots/ursim_e-series
 
-echo once running, open VNC client to 127.0.0.1:5901 or browse to http://127.0.0.1:6080
+echo 'once running, open VNC client to 127.0.0.1:5901 or browse to http://127.0.0.1:6080/vnc.html?host=127.0.0.1&port=6080'
 docker run --rm -it -p 5901:5900 -p 6080:6080 -e ROBOT_MODEL=$MODEL -v "$PROGRAM_DIR:/ursim/programs" --platform=linux/amd64 $CONTAINER
 
-# now open VNC client to 127.0.0.1:5901 or browse to http://127.0.0.1:6080
+# now open VNC client to 127.0.0.1:5901 or browse to http://127.0.0.1:6080/vnc.html?host=127.0.0.1&port=6080
 # you may need to ignore the IP addresses the docker suggests...
 ```
 
@@ -46,10 +46,8 @@ Therefore these instructions are based on running the Docker image provided by U
   - the x86 to ARM emulation is done by the underlying Rosetta but we tell Docker that the image is an amd64 with the `--platform` argument. One can use the exact same instructions here for Mac Intel, Windows or Linux by just not adding the `--platform` argument.
   - the -p arguments are used to expose ports from docker to the host computer. 5900 is for VNC but may already be used by launchd so we map it to 5901 locally. 6080 is for http.
   - the -v argument is to map a directory within the docker with a directory on the mac.
-- now that the URSim software is launched in docker, we access it using a remote screen sharing program VNC.
-- Run a VNC client. If you don't have one, you can download and install [RealVNC Viewer for Desktop for macOS](https://www.realvnc.com/en/connect/download/viewer/)
-- in the VNC client, connect to `127.0.0.1:5901`
-- URSim should show on your VNC client screen
+- in a [VNC client](https://www.realvnc.com/en/connect/download/viewer/), connect to `127.0.0.1:5901` or browse to [http://127.0.0.1:6080/vnc.html?host=127.0.0.1&port=6080](http://127.0.0.1:6080/vnc.html?host=127.0.0.1&port=6080)
+- URSim should show on your VNC client screen or browser
 
 ## Usage Considerations
 
@@ -59,9 +57,7 @@ Docker are lightweight ephemeral instances. When a docker instance is terminated
 
 ### VNC vs HTTP
 
-Instead of using VNC to access the URSim software, a web browser, such as Safari or Chrome, can be used by going to the url: `http://127.0.0.1:6080`.
-
-Note that if the host computer (your mac) moves to a different network, such as when a laptop is using a different Wifi network, then the IP address changes. Therefore, while your docker may be still running, you will need to find your new IP address and reconnect your VNC client or web browser to that new IP address.
+You can use a browser instead of VNC by browsing to [http://127.0.0.1:6080/vnc.html?host=127.0.0.1&port=6080](http://127.0.0.1:6080/vnc.html?host=127.0.0.1&port=6080)
 
 ### macOS Version
 
@@ -83,4 +79,4 @@ terryc on discord Universal Robots channel shared its docker compose file, which
 
 Pull requests and issues welcome.
 
-Originally by [Marc Blanchet](https://github.com/marcblanchet/ursim_on_mac_apple_silicon). Thanks to Julie Blanchet and Guillaume Blanchet for hints and testing of these instructions. Updates by [samy kamkar](https://github.com/samyk/ursim_mac)..
+Originally by [Marc Blanchet](https://github.com/marcblanchet/ursim_on_mac_apple_silicon). Thanks to Julie Blanchet and Guillaume Blanchet for hints and testing of these instructions. Updates by [samy kamkar](https://github.com/samyk/ursim_mac).
