@@ -80,4 +80,4 @@ terryc on discord Universal Robots channel shared its docker compose file, which
 
 Pull requests and issues welcome.
 
-Thanks to Julie Blanchet and Guillaume Blanchet for hints and testing of these instructions. Updates by samy kamkar.
+Originally by [Marc Blanchet](https://github.com/marcblanchet/ursim_on_mac_apple_silicon). Thanks to Julie Blanchet and Guillaume Blanchet for hints and testing of these instructions. Updates by [samy kamkar](https://github.com/samyk/ursim_mac)..
