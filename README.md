@@ -20,9 +20,12 @@ MODEL=UR5
 # cb3 or e-series?
 #CONTAINER=universalrobots/ursim_cb3
 CONTAINER=universalrobots/ursim_e-series
+
+echo once running, open VNC client to 127.0.0.1:5901 or browse to http://127.0.0.1:6080
 docker run --rm -it -p 5901:5900 -p 6080:6080 -e ROBOT_MODEL=$MODEL -v "$PROGRAM_DIR:/ursim/programs" --platform=linux/amd64 $CONTAINER
 
-open http://127.0.0.1:6080
+# now open VNC client to 127.0.0.1:5901 or browse to http://127.0.0.1:6080
+# you may need to ignore the IP addresses the docker suggests...
 ```
 
 ## Setup Considerations
