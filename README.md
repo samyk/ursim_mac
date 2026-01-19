@@ -3,15 +3,6 @@
 ## Quick Setup
 
 ```sh
-# install rosetta if needed
-ls /Library/Apple/usr/libexec/oah/libRosettaRuntime || softwareupdate --install-rosetta --agree-to-license
-
-# install docker and brew if needed
-docker -v || (brew -v || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && brew install docker)
-
-PROGRAM_DIR="${HOME}/Documents/programs"
-mkdir -p "$PROGRAM_DIR"
-
 # robot model
 # CB3 models: UR3 UR5 UR10
 # E-series models: UR3 UR5 UR7 UR8LONG UR10 UR12 UR15 UR16 UR18 UR20 UR30
@@ -21,8 +12,17 @@ MODEL=UR5
 #CONTAINER=universalrobots/ursim_cb3
 CONTAINER=universalrobots/ursim_e-series
 
+PROGRAM_DIR="${HOME}/Documents/programs"
+mkdir -p "$PROGRAM_DIR"
+
+# install rosetta if needed
+ls /Library/Apple/usr/libexec/oah/libRosettaRuntime || softwareupdate --install-rosetta --agree-to-license
+
+# install docker and brew if needed
+docker -v || (brew -v || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && brew install docker)
+
 echo 'once running, open VNC client to 127.0.0.1:5901 or browse to http://127.0.0.1:6080/vnc.html?host=127.0.0.1&port=6080'
-docker run --rm -it -p 5901:5900 -p 6080:6080 -e ROBOT_MODEL=$MODEL -v "$PROGRAM_DIR:/ursim/programs" --platform=linux/amd64 $CONTAINER
+docker run --rm -it -p 5901:5900 -p 6080:6080 -p 29999:29999 -p 30003:30003 -p 30004:30004 -p 502:502 -p 2222:22 -v "$PROGRAM_DIR:/ursim/programs" --platform=linux/amd64 -e ROBOT_MODEL="$MODEL" $CONTAINER
 
 # now open VNC client to 127.0.0.1:5901 or browse to http://127.0.0.1:6080/vnc.html?host=127.0.0.1&port=6080
 # you may need to ignore the IP addresses the docker suggests...
@@ -34,8 +34,9 @@ As of Jan 2025, [Universal Robots E-Series Offline Simulator](https://www.univer
 
 Therefore these instructions are based on running the Docker image provided by Universal Robotics, tell docker it is a amd64 image, and let Apple Rosetta do the x86 emulation. The performance, while far from a native ARM application, was sufficient. Hence the instructions below.
 
-## Steps
+## Previous Steps
 
+- Note these don't account for certain ports, robot model, or CB3 arms
 - Install Rosetta on your Mac, which does Intel x86 emulation on ARM:
   - In Terminal: `softwareupdate --install-rosetta --agree-to-license`
 - Install Docker
