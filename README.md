@@ -22,7 +22,8 @@ ls /Library/Apple/usr/libexec/oah/libRosettaRuntime || softwareupdate --install-
 docker -v || (brew -v || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && brew install docker)
 
 echo 'once running, open VNC client to 127.0.0.1:5901 or browse to http://127.0.0.1:6080/vnc.html?host=127.0.0.1&port=6080'
-docker run --rm -it -p 5901:5900 -p 6080:6080 -p 29999:29999 -p 30003:30003 -p 30004:30004 -p 502:502 -p 2222:22 -v "$PROGRAM_DIR:/ursim/programs" --platform=linux/amd64 -e ROBOT_MODEL="$MODEL" $CONTAINER
+docker run --rm -it -p 2222:22 -p 502:502 -p 5901:5900 -p 6000:6000 -p 6080:6080 -p 29919:29919 -p 29999:29999 -p 30001:30001 -p 30002:30002 -p 30003:30003 -p 30004:30004 -p 30011:30011 -p 30012:30012 -p 30013:30013 -p 40000:40000 -p 44818:44818 -v "$PROGRAM_DIR:/ursim/programs" --platform=linux/amd64 -e ROBOT_MODEL="$MODEL" $CONTAINER
+
 
 # now open VNC client to 127.0.0.1:5901 or browse to http://127.0.0.1:6080/vnc.html?host=127.0.0.1&port=6080
 # you may need to ignore the IP addresses the docker suggests...
